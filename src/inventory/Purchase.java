@@ -32,7 +32,7 @@ public class Purchase extends javax.swing.JFrame {
         load();
     }
     Connection con;
-    PreparedStatement pst;
+    PreparedStatement pst,pstt;
     DefaultTableModel df;
     
     public void Connect(){
@@ -45,6 +45,32 @@ public class Purchase extends javax.swing.JFrame {
             Logger.getLogger(suppliers.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(suppliers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    public void updateStock()
+    {
+        try {
+            String product_id = txtproductid.getText();
+            String product_name = txtproductname.getText();
+            String unit = txtunit.getText();
+            int quantity = Integer.parseInt(txtquantity.getText());
+            float total_value = Float.valueOf(txttotalvalue.getText());
+
+        
+            float price_per_unit = total_value/Float.valueOf(quantity);
+            
+            pst = con.prepareStatement("insert into stock(product_id,product_name,unit,quantity,total_value,price_per_unit) values(?,?,?,?,?,?)");
+            pst.setString(1,product_id);
+            pst.setString(2,product_name);
+            pst.setString(3,unit);
+            pst.setInt(4,quantity);
+            pst.setFloat(5,total_value);
+            pst.setFloat(6,price_per_unit);
+            pst.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -70,6 +96,7 @@ public class Purchase extends javax.swing.JFrame {
                     v2.add(rs.getString("GSTN"));
                     v2.add(rs.getString("unit"));
                     v2.add(rs.getString("quantity"));
+                    v2.add(rs.getString("rate"));
                     v2.add(rs.getString("vat_num"));
                     v2.add(rs.getString("amount"));
                     v2.add(rs.getString("int_out"));
@@ -145,6 +172,8 @@ public class Purchase extends javax.swing.JFrame {
         txtinvoicenumber = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         txtsupplierid = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        txtrate = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -195,6 +224,17 @@ public class Purchase extends javax.swing.JFrame {
             }
         });
 
+        txttaxableamount.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txttaxableamountFocusGained(evt);
+            }
+        });
+
+        txtcgst.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtcgstFocusGained(evt);
+            }
+        });
         txtcgst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcgstActionPerformed(evt);
@@ -204,8 +244,20 @@ public class Purchase extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel12.setText("SGST");
 
+        txtigst.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtigstFocusGained(evt);
+            }
+        });
+
         jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel13.setText("CGST");
+
+        txtsgst.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtsgstFocusGained(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel14.setText("In/Out");
@@ -231,11 +283,26 @@ public class Purchase extends javax.swing.JFrame {
             }
         });
 
+        txtvatvalue.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtvatvalueFocusGained(evt);
+            }
+        });
+
+        txttotalvalue.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txttotalvalueFocusGained(evt);
+            }
+        });
+
         jLabel21.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel21.setText("Invoice Number");
 
         jLabel22.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel22.setText("Supplier Id");
+
+        jLabel23.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel23.setText("Rate");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -245,46 +312,48 @@ public class Purchase extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(40, 40, 40)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtsuppliername, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtproductname, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtproductid, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtgstn, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtinvoicenumber, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtsupplierid, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtunit, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtquantity))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtinout, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtvatnumber, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txttaxableamount, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtgstpercent, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(36, 36, 36))
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(40, 40, 40)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtsuppliername, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtproductname, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtproductid, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtgstn, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtinvoicenumber, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtsupplierid, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(txtunit, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(txtquantity))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(10, 10, 10)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtinout, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtvatnumber, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txttaxableamount, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtgstpercent, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtrate, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -359,6 +428,10 @@ public class Purchase extends javax.swing.JFrame {
                     .addComponent(txtquantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtunit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtrate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -367,7 +440,7 @@ public class Purchase extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtinout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -386,7 +459,7 @@ public class Purchase extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(txttaxableamount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtunloading, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -414,11 +487,11 @@ public class Purchase extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Invoice number", "Product ID", "Product Name", "Supplier Name", "Supplier ID", "GSTN", "Unit", "Quantity", "VAT Number", "Taxable Amount", "IN/OUT", "GST Percent", "IGST", "CGST", "SGST", "Unloading", "Freight", "VAT Percent", "Vat Value", "Total Value"
+                "Invoice number", "Product ID", "Product Name", "Supplier Name", "Supplier ID", "GSTN", "Unit", "Quantity", "Rate", "VAT Number", "Taxable Amount", "IN/OUT", "GST Percent", "IGST", "CGST", "SGST", "Unloading", "Freight", "VAT Percent", "Vat Value", "Total Value"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -490,7 +563,7 @@ public class Purchase extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -564,6 +637,7 @@ public class Purchase extends javax.swing.JFrame {
             txtgstn.setText("");
             txtunit.setText("");
             txtquantity.setText("");
+            txtrate.setText("");
             txtvatnumber.setText("");
             txttaxableamount.setText("");
             txtinout.setText("");
@@ -599,6 +673,7 @@ public class Purchase extends javax.swing.JFrame {
             txtgstn.setText("");
             txtunit.setText("");
             txtquantity.setText("");
+            txtrate.setText("");
             txtvatnumber.setText("");
             txttaxableamount.setText("");
             txtinout.setText("");
@@ -630,6 +705,7 @@ public class Purchase extends javax.swing.JFrame {
         
         try {
             
+            
             int invoice_num = Integer.parseInt(txtinvoicenumber.getText());
             String product_id = txtproductid.getText();
             String product_name = txtproductname.getText();
@@ -638,6 +714,7 @@ public class Purchase extends javax.swing.JFrame {
             String gstn = txtgstn.getText();
             String unit = txtunit.getText();
             int quantity = Integer.parseInt(txtquantity.getText());
+            float rate = Float.valueOf(txtrate.getText());
             String vat_num = txtvatnumber.getText();
             float amount = Float.valueOf(txttaxableamount.getText());
             String in_out = txtinout.getText();
@@ -652,7 +729,7 @@ public class Purchase extends javax.swing.JFrame {
             float total_value = Float.valueOf(txttotalvalue.getText());
             
             
-            pst = con.prepareStatement("update purchase set invoice_num=?,product_id=?,product_name=?,supplier_name=?,supplier_id=?,GSTN=?,unit=?,quantity=?,vat_num=?,amount=?,int_out=?,gst_percent=?,igst=?,cgst=?,sgst=?,unloading=?,freight=?,vat_percent=?,vat_value=?,total_value=? where invoice_num=?");
+            pst = con.prepareStatement("update purchase set invoice_num=?,product_id=?,product_name=?,supplier_name=?,supplier_id=?,GSTN=?,unit=?,quantity=?,rate=?,vat_num=?,amount=?,int_out=?,gst_percent=?,igst=?,cgst=?,sgst=?,unloading=?,freight=?,vat_percent=?,vat_value=?,total_value=? where invoice_num=?");
             pst.setInt(1,invoice_num);
             pst.setString(2,product_id);
             pst.setString(3,product_name);
@@ -661,23 +738,25 @@ public class Purchase extends javax.swing.JFrame {
             pst.setString(6,gstn);
             pst.setString(7,unit);
             pst.setInt(8,quantity);
-            pst.setString(9,vat_num);
-            pst.setFloat(10,amount);
-            pst.setString(11,in_out);
-            pst.setInt(12,gst_percent);
-            pst.setFloat(13,igst);
-            pst.setFloat(14,cgst);
-            pst.setFloat(15,sgst);
-            pst.setInt(16,unloading);
-            pst.setInt(17,freight);
-            pst.setInt(18,vat_percent);
-            pst.setFloat(19,vat_value);
-            pst.setFloat(20,total_value);
-            pst.setInt(21,invoice);
+            pst.setFloat(9,rate);
+            pst.setString(10,vat_num);
+            pst.setFloat(11,amount);
+            pst.setString(12,in_out);
+            pst.setInt(13,gst_percent);
+            pst.setFloat(14,igst);
+            pst.setFloat(15,cgst);
+            pst.setFloat(16,sgst);
+            pst.setInt(17,unloading);
+            pst.setInt(18,freight);
+            pst.setInt(19,vat_percent);
+            pst.setFloat(20,vat_value);
+            pst.setFloat(21,total_value);
+            pst.setInt(22,invoice);
             
             pst.executeUpdate();
             
             JOptionPane.showMessageDialog(this,"Purchase Updated");
+            updateStock();
             txtinvoicenumber.setText("");
             txtproductid.setText("");
             txtproductname.setText("");
@@ -686,6 +765,7 @@ public class Purchase extends javax.swing.JFrame {
             txtgstn.setText("");
             txtunit.setText("");
             txtquantity.setText("");
+            txtrate.setText("");
             txtvatnumber.setText("");
             txttaxableamount.setText("");
             txtinout.setText("");
@@ -727,6 +807,7 @@ public class Purchase extends javax.swing.JFrame {
             String gstn = txtgstn.getText();
             String unit = txtunit.getText();
             int quantity = Integer.parseInt(txtquantity.getText());
+            float rate = Float.valueOf(txtrate.getText());
             String vat_num = txtvatnumber.getText();
             float amount = Float.valueOf(txttaxableamount.getText());
             String in_out = txtinout.getText();
@@ -740,8 +821,7 @@ public class Purchase extends javax.swing.JFrame {
             float vat_value = Float.valueOf(txtvatvalue.getText());
             float total_value = Float.valueOf(txttotalvalue.getText());
             
-            
-            pst = con.prepareStatement("insert into purchase(invoice_num,product_id,product_name,supplier_name,supplier_id,GSTN,unit,quantity,vat_num,amount,int_out,gst_percent,igst,cgst,sgst,unloading,freight,vat_percent,vat_value,total_value) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            pst = con.prepareStatement("insert into purchase(invoice_num,product_id,product_name,supplier_name,supplier_id,GSTN,unit,quantity,rate,vat_num,amount,int_out,gst_percent,igst,cgst,sgst,unloading,freight,vat_percent,vat_value,total_value) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             
             pst.setInt(1,invoice_num);
             pst.setString(2,product_id);
@@ -751,20 +831,22 @@ public class Purchase extends javax.swing.JFrame {
             pst.setString(6,gstn);
             pst.setString(7,unit);
             pst.setInt(8,quantity);
-            pst.setString(9,vat_num);
-            pst.setFloat(10,amount);
-            pst.setString(11,in_out);
-            pst.setInt(12,gst_percent);
-            pst.setFloat(13,igst);
-            pst.setFloat(14,cgst);
-            pst.setFloat(15,sgst);
-            pst.setInt(16,unloading);
-            pst.setInt(17,freight);
-            pst.setInt(18,vat_percent);
-            pst.setFloat(19,vat_value);
-            pst.setFloat(20,total_value);
+            pst.setFloat(9,rate);
+            pst.setString(10,vat_num);
+            pst.setFloat(11,amount);
+            pst.setString(12,in_out);
+            pst.setInt(13,gst_percent);
+            pst.setFloat(14,igst);
+            pst.setFloat(15,cgst);
+            pst.setFloat(16,sgst);
+            pst.setInt(17,unloading);
+            pst.setInt(18,freight);
+            pst.setInt(19,vat_percent);
+            pst.setFloat(20,vat_value);
+            pst.setFloat(21,total_value);
             
             pst.executeUpdate();
+            
             
             JOptionPane.showMessageDialog(this,"Purchase Added");
             txtinvoicenumber.setText("");
@@ -775,6 +857,7 @@ public class Purchase extends javax.swing.JFrame {
             txtgstn.setText("");
             txtunit.setText("");
             txtquantity.setText("");
+            txtrate.setText("");
             txtvatnumber.setText("");
             txttaxableamount.setText("");
             txtinout.setText("");
@@ -787,11 +870,8 @@ public class Purchase extends javax.swing.JFrame {
             txtvatpercent.setText("");
             txtvatvalue.setText("");
             txttotalvalue.setText("");
-            
-            
             txtinvoicenumber.requestFocus();
-            load();
-            
+            load(); 
             
             
         } catch (SQLException ex) {
@@ -815,24 +895,106 @@ public class Purchase extends javax.swing.JFrame {
             txtgstn.setText(df.getValueAt(selected,5).toString());
             txtunit.setText(df.getValueAt(selected,6).toString());
             txtquantity.setText(df.getValueAt(selected,7).toString());
-            txtvatnumber.setText(df.getValueAt(selected,8).toString());
-            txttaxableamount.setText(df.getValueAt(selected,9).toString());
-            txtinout.setText(df.getValueAt(selected,10).toString());
-            txtgstpercent.setText(df.getValueAt(selected,11).toString());
-            txtigst.setText(df.getValueAt(selected,12).toString());
-            txtcgst.setText(df.getValueAt(selected,13).toString());
-            txtsgst.setText(df.getValueAt(selected,14).toString());
-            txtunloading.setText(df.getValueAt(selected,15).toString());
-            txtfreight.setText(df.getValueAt(selected,16).toString());
-            txtvatpercent.setText(df.getValueAt(selected,17).toString());
-            txtvatvalue.setText(df.getValueAt(selected,18).toString());
-            txttotalvalue.setText(df.getValueAt(selected,19).toString());
+            txtrate.setText(df.getValueAt(selected,8).toString());
+            txtvatnumber.setText(df.getValueAt(selected,9).toString());
+            txttaxableamount.setText(df.getValueAt(selected,10).toString());
+            txtinout.setText(df.getValueAt(selected,11).toString());
+            txtgstpercent.setText(df.getValueAt(selected,12).toString());
+            txtigst.setText(df.getValueAt(selected,13).toString());
+            txtcgst.setText(df.getValueAt(selected,14).toString());
+            txtsgst.setText(df.getValueAt(selected,15).toString());
+            txtunloading.setText(df.getValueAt(selected,16).toString());
+            txtfreight.setText(df.getValueAt(selected,17).toString());
+            txtvatpercent.setText(df.getValueAt(selected,18).toString());
+            txtvatvalue.setText(df.getValueAt(selected,19).toString());
+            txttotalvalue.setText(df.getValueAt(selected,20).toString());
         
         
         jButton2.setEnabled(false);
 
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void txttaxableamountFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txttaxableamountFocusGained
+        try{
+        float taxableamount = Integer.parseInt(txtquantity.getText()) * Float.valueOf(txtrate.getText());
+        txttaxableamount.setText(String.valueOf(taxableamount));
+        }
+        catch(Exception e)
+        {            
+        }
+    }//GEN-LAST:event_txttaxableamountFocusGained
+
+    private void txtigstFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtigstFocusGained
+        try{
+        String inout = txtinout.getText();
+        if ("I".equals(inout)){
+            txtigst.setText("0");
+            
+        }
+        else if ("O".equals(inout)){
+            float igst = Float.valueOf(txttaxableamount.getText()) * Float.valueOf(txtgstpercent.getText()) / 100 ;
+            txtigst.setText(String.valueOf(igst));
+        }
+        }
+        catch (Exception e){}
+    }//GEN-LAST:event_txtigstFocusGained
+
+    private void txtcgstFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcgstFocusGained
+        try{
+        if ("O".equals(txtinout.getText())){
+            txtcgst.setText("0");
+            txtsgst.setText("0");
+        }
+        else if ("I".equals(txtinout.getText()))
+        {
+            float per = Float.valueOf(txtgstpercent.getText()) / 2;
+            float cgst = Float.valueOf(txttaxableamount.getText()) * per / 100 ;
+            txtcgst.setText(String.valueOf(cgst));
+            txtsgst.setText(String.valueOf(cgst));
+   
+        }}
+        catch (Exception e){}
+    }//GEN-LAST:event_txtcgstFocusGained
+
+    private void txtsgstFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtsgstFocusGained
+        try{
+        if ("O".equals(txtinout.getText())){
+            txtsgst.setText("0");
+            txtcgst.setText("0");
+        }
+        else if ("I".equals(txtinout.getText()))
+        {
+            float per2 = Float.valueOf(txtgstpercent.getText()) / 2;
+            float sgst = Float.valueOf(txttaxableamount.getText()) * per2 / 100 ;
+            txtsgst.setText(String.valueOf(sgst));
+            txtcgst.setText(String.valueOf(sgst));
+   
+        }}
+        catch (Exception e){}
+    }//GEN-LAST:event_txtsgstFocusGained
+
+    private void txtvatvalueFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtvatvalueFocusGained
+        try{
+        float per = Float.valueOf(txtvatpercent.getText());
+        float vatvalue = Float.valueOf(txttaxableamount.getText()) * per /100;
+        txtvatvalue.setText(String.valueOf(vatvalue));
+        }
+        catch(Exception e)
+        {
+        }
+        
+    }//GEN-LAST:event_txtvatvalueFocusGained
+
+    private void txttotalvalueFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txttotalvalueFocusGained
+        try{
+            float total = Float.valueOf(txttaxableamount.getText()) + Float.valueOf(txtigst.getText()) + Float.valueOf(txtcgst.getText()) + Float.valueOf(txtsgst.getText()) + Float.valueOf(txtunloading.getText()) + Float.valueOf(txtfreight.getText()) + Float.valueOf(txtvatvalue.getText());
+            txttotalvalue.setText(String.valueOf(total));
+        }
+        catch(Exception e)
+        {            
+        }
+    }//GEN-LAST:event_txttotalvalueFocusGained
+    
     /**
      * @param args the command line arguments
      */
@@ -889,6 +1051,7 @@ public class Purchase extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -909,6 +1072,7 @@ public class Purchase extends javax.swing.JFrame {
     private javax.swing.JTextField txtproductid;
     private javax.swing.JTextField txtproductname;
     private javax.swing.JTextField txtquantity;
+    private javax.swing.JTextField txtrate;
     private javax.swing.JTextField txtsgst;
     private javax.swing.JTextField txtsupplierid;
     private javax.swing.JTextField txtsuppliername;

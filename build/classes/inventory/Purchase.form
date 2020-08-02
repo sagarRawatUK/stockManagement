@@ -29,7 +29,7 @@
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" pref="569" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="574" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="jButton2" min="-2" pref="76" max="-2" attributes="0"/>
@@ -97,61 +97,63 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel23" min="-2" pref="111" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel2" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
-                                      <Component id="jLabel3" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
-                                      <Component id="jLabel4" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtsuppliername" min="-2" pref="172" max="-2" attributes="0"/>
-                                      <Component id="txtproductname" min="-2" pref="172" max="-2" attributes="0"/>
-                                      <Component id="txtproductid" min="-2" pref="172" max="-2" attributes="0"/>
-                                      <Component id="txtgstn" min="-2" pref="172" max="-2" attributes="0"/>
-                                      <Component id="txtinvoicenumber" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
-                                      <Component id="txtsupplierid" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel6" min="-2" pref="42" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="txtunit" min="-2" pref="71" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel2" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                                          <Component id="jLabel4" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                                          <Component id="jLabel5" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jLabel8" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
-                                      <Component id="jLabel14" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
-                                      <Component id="jLabel19" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel7" min="-2" pref="65" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="txtquantity" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtsuppliername" min="-2" pref="172" max="-2" attributes="0"/>
+                                          <Component id="txtproductname" min="-2" pref="172" max="-2" attributes="0"/>
+                                          <Component id="txtproductid" min="-2" pref="172" max="-2" attributes="0"/>
+                                          <Component id="txtgstn" min="-2" pref="172" max="-2" attributes="0"/>
+                                          <Component id="txtinvoicenumber" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                                          <Component id="txtsupplierid" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txtinout" min="-2" pref="172" max="-2" attributes="0"/>
-                                              <Component id="txtvatnumber" min="-2" pref="172" max="-2" attributes="0"/>
-                                              <Component id="txttaxableamount" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
-                                              <Component id="txtgstpercent" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel6" min="-2" pref="42" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="txtunit" min="-2" pref="71" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jLabel8" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                                          <Component id="jLabel14" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                                          <Component id="jLabel19" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabel7" min="-2" pref="65" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="txtquantity" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="txtinout" min="-2" pref="172" max="-2" attributes="0"/>
+                                                  <Component id="txtvatnumber" min="-2" pref="172" max="-2" attributes="0"/>
+                                                  <Component id="txttaxableamount" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                                                  <Component id="txtgstpercent" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                                                  <Component id="txtrate" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
                                   </Group>
                               </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel9" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
@@ -196,7 +198,7 @@
                               <Component id="jLabel21" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
                               <Component id="jLabel22" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -247,7 +249,12 @@
                       <Component id="jLabel7" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                       <Component id="txtunit" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel23" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="txtrate" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                       <Component id="txtvatnumber" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -256,7 +263,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" min="-2" pref="23" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txtinout" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel14" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
@@ -281,7 +288,7 @@
                           <Component id="txttaxableamount" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel10" min="-2" pref="23" max="-2" attributes="0"/>
                       <Component id="txtunloading" min="-2" max="-2" attributes="0"/>
@@ -412,9 +419,13 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txttaxableamount">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txttaxableamountFocusGained"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtcgst">
           <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtcgstFocusGained"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtcgstActionPerformed"/>
           </Events>
         </Component>
@@ -427,6 +438,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtigst">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtigstFocusGained"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
@@ -437,6 +451,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtsgst">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtsgstFocusGained"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel14">
           <Properties>
@@ -498,8 +515,14 @@
         <Component class="javax.swing.JTextField" name="txtvatpercent">
         </Component>
         <Component class="javax.swing.JTextField" name="txtvatvalue">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtvatvalueFocusGained"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txttotalvalue">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txttotalvalueFocusGained"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel21">
           <Properties>
@@ -521,6 +544,16 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtsupplierid">
         </Component>
+        <Component class="javax.swing.JLabel" name="jLabel23">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="12" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Rate"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtrate">
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -530,7 +563,7 @@
         <Component class="javax.swing.JTable" name="jTable1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="20" rowCount="0">
+              <Table columnCount="21" rowCount="0">
                 <Column editable="false" title="Invoice number" type="java.lang.Object"/>
                 <Column editable="false" title="Product ID" type="java.lang.Object"/>
                 <Column editable="false" title="Product Name" type="java.lang.Object"/>
@@ -539,6 +572,7 @@
                 <Column editable="false" title="GSTN" type="java.lang.Object"/>
                 <Column editable="false" title="Unit" type="java.lang.Object"/>
                 <Column editable="false" title="Quantity" type="java.lang.Object"/>
+                <Column editable="false" title="Rate" type="java.lang.Object"/>
                 <Column editable="false" title="VAT Number" type="java.lang.Object"/>
                 <Column editable="false" title="Taxable Amount" type="java.lang.Object"/>
                 <Column editable="false" title="IN/OUT" type="java.lang.Object"/>
@@ -556,6 +590,11 @@
             <Property name="autoResizeMode" type="int" value="0"/>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
